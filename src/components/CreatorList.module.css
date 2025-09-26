@@ -1,0 +1,188 @@
+.CreatorListHeroSec {
+  background: linear-gradient(to right, #000, rgb(64, 0, 0));
+  /* opacity: 0; */
+  padding: 100px 0px 30px;
+  /* padding: 50px 0px 30px; */
+  color:#fff;
+}
+
+
+.followus {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  /* border-radius: 7px; */
+  list-style: none !important;
+  padding: 0px;
+  margin-bottom: 0px;
+  /* overflow: hidden; */
+  background-color: #fff;
+}
+
+.followus a {
+  color: initial;
+}
+
+.followus .items {
+  position: relative;
+  /* overflow: hidden; */
+  padding: 10px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+}
+
+.followus .items:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #000000;
+}
+
+.followus .items:last-child {
+  border-bottom: none;
+}
+
+.followus .items .icons {
+  width: 18px;
+  height: 18px;
+  color: #000;
+}
+
+.tooltipText {
+  background-color: #fff;
+  position: absolute;
+  top: 0%;
+  right: 90%;
+  /* transform: translate(-0%, 0); */
+  /* bottom: 100%; */
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 15px;
+  opacity: 0;
+  transition: all 0.5s;
+  /* transform-origin: initial; */
+  text-align: right;
+  align-items: flex-end;
+  display: flex;
+  width: max-content;
+  justify-content: right;
+}
+
+
+/*  Membuat dan style tip*/
+.tooltipText::after {
+  content: "";
+  border-width: 5px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+  position: absolute;
+  top: 100%;
+  left: 40%;
+  margin-left: 5%;
+  z-index: 10;
+}
+/* Hover text tooltip */
+.followus .items:hover .tooltipText {
+  opacity: 1;
+  transform: translateX(-10px);
+}
+
+
+.contentSec {
+  padding: 20px 0px;
+  text-align: left;
+}
+
+.CreatorList_contentSec h1 {
+  font-size: 5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+  /* font-family: "Kepler-Std Regular Display"; */
+  font-family: "Kepler Std Bold Semicondensed Display Italic";
+}
+
+.CreatorList_contentSec:hover h1 {
+  color: var(--primary-color);
+}
+.CreatorList_contentSecExcerpt {
+    font-size: 22px;
+    font-family: kepler-std, serif !important;
+    font-weight: 300;
+    font-style: normal;
+    color: var(--secondary-color);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.collapsed {
+  -webkit-line-clamp: 5; /* Limits to 7 lines */
+}
+
+.expanded {
+  -webkit-line-clamp: unset;
+  display: block;
+  overflow: visible;
+}
+@media screen and (max-width: 900px) {
+  .tooltipText {
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    /* transform: translate(-0%, 0); */
+    /* bottom: 100%; */
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+  .followus .items:hover .tooltipText {
+    opacity: 1;
+    transform: translateY(25px);
+  }
+  .CreatorListHeroSec {
+    padding: 30px 0px 30px;
+  }
+
+  .CreatorList_contentSec {
+    padding: 10px 0px;
+  }
+
+  .CreatorList_contentSec h1 {
+    font-size: 40px;
+  }
+
+  .CreatorList_contentSec p {
+    font-size: 22px;
+  }
+
+
+  .followus {
+    display: flex;
+    margin-top: 20px;
+    /* border; */
+  }
+
+  .followus .items {
+    border-right: 1px solid rgba(0, 0, 0, 0.25);
+    border-bottom: none;
+  }
+
+  .followus .items:last-child {
+    border-right: none;
+  }
+
+  .CreatorListHeroBanner .heroSection {
+    min-height: 44vw;
+  }
+
+  .CreatorListHeroBanner p {
+    line-height: 1.3;
+  }
+
+}
+
+
