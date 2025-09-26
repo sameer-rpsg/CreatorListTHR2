@@ -635,9 +635,11 @@ a {
     transform: none;
     top: 70px;
     left: 0;
-      background: linear-gradient(to right, #000, rgb(64, 0, 0));
+      /* background: linear-gradient(to right, #000, rgb(64, 0, 0)); */
+      background: linear-gradient(to right, #000, #f13636);
     z-index: 9;
     gap: 0;
+
   }
 }
 
@@ -679,7 +681,7 @@ a {
     transform: none;
     top: 70px;
     left: 0;
-      background: linear-gradient(to right, #000, rgb(64, 0, 0));
+      background: linear-gradient(to right, #000000c9, rgb(64, 0, 0));
     z-index: 9;
     gap: 0;
   }
