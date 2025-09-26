@@ -8,56 +8,24 @@ import { FaFacebookF, FaLink } from "react-icons/fa";
 const CreatorHero = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const handleToggle = () => {
-    setIsExpanded((prev) => !prev);
-  };
-  return (
-    <section id="CreatorListherosec" className={styles.CreatorListHeroSec}>
-      <div className="container">
-        <div className="row d-flex align-items-center justify-content-start">
-          <div className="col-md-8 col-lg-10">
-            <div className={styles.CreatorList_contentSec}>
-              <h1>
-                The Creator A-List: <br /> The 50 Most Influential Influencers
-              </h1>
-            </div>
-          </div>
-          <div className="col-md-4 col-lg-2 d-flex align-items-end justify-content-md-end">
-            <ul className={styles.followus}>
-              <Link target="_blank" href="">
-                <li className={styles.items}>
-                  <span className={styles.tooltipText}>Share on Whatsapp</span>
-                  <RiWhatsappFill className={styles.icons} />
-                </li>
-              </Link>
-              <Link target="_blank" href="">
-                <li className={styles.items}>
-                  <span className={styles.tooltipText}>Share on Facebook</span>
+ const handleToggle = () => {
+    setIsExpanded((prev) => {
+      const nextState = !prev;
 
-                  <FaFacebookF className={styles.icons} />
-                </li>
-              </Link>
-              <Link target="_blank" href="">
-                <li className={styles.items}>
-                  <span className={styles.tooltipText}>Share on X</span>
-                  <BsTwitterX className={styles.icons} />
-                </li>
-              </Link>
-              <li className={styles.items}>
-                <span className={styles.tooltipText}>copy</span>
-                <FaLink className={styles.icons} />
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="col-md-12 py-5">
-          <div className={styles.CreatorList_contentSecExcerptWrapper}>
-            <span
-              className={`${styles.CreatorList_contentSecExcerpt} ${
-                isExpanded ? styles.expanded : styles.collapsed
-              }`}
-            >
-              The Hollywood Reporter India’s Creator A-List 2025, in
+      // Scroll to top of section when collapsing (Read Less)
+      if (prev && !nextState) {
+        const section = document.getElementById("CreatorListherosec");
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+
+      return nextState;
+    });
+  };
+
+  // ✅ Define your long text here
+  const fullText = `The Hollywood Reporter India’s Creator A-List 2025, in
               collaboration with Ormax Media, ranks India’s 50 most influential
               digital creators who have redefined and expanded the meaning of
               entertainment not just in the country, but globally. India’s
@@ -140,14 +108,97 @@ const CreatorHero = () => {
               analysis. Third, the collaboration between THR India and Ormax
               Media ensures neutrality: neither party has a vested interest in
               the creator economy, which enhances the credibility and
-              objectivity of the list.
+              objectivity of the list.`;
+
+  const characterLimit = 1000;
+
+  const isLongText = fullText.length > characterLimit;
+  const visibleText = fullText.slice(0, characterLimit);
+  const hiddenText = fullText.slice(characterLimit);
+  return (
+    <section id="CreatorListherosec" className={styles.CreatorListHeroSec}>
+      <div className="container">
+        <div className="row d-flex align-items-center justify-content-start">
+          <div className="col-md-8 col-lg-10">
+            <div className={styles.CreatorList_contentSec}>
+              <h1>
+                The Creator A-List: <br /> The 50 Most Influential Influencers
+              </h1>
+            </div>
+          </div>
+          <div className="col-md-4 col-lg-2 d-flex align-items-end justify-content-md-end">
+            <ul className={styles.followus}>
+              <Link target="_blank" href="">
+                <li className={styles.items}>
+                  <span className={styles.tooltipText}>Share on Whatsapp</span>
+                  <RiWhatsappFill className={styles.icons} />
+                </li>
+              </Link>
+              <Link target="_blank" href="">
+                <li className={styles.items}>
+                  <span className={styles.tooltipText}>Share on Facebook</span>
+
+                  <FaFacebookF className={styles.icons} />
+                </li>
+              </Link>
+              <Link target="_blank" href="">
+                <li className={styles.items}>
+                  <span className={styles.tooltipText}>Share on X</span>
+                  <BsTwitterX className={styles.icons} />
+                </li>
+              </Link>
+              <li className={styles.items}>
+                <span className={styles.tooltipText}>copy</span>
+                <FaLink className={styles.icons} />
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="col-md-12 py-3">
+          <div className={styles.CreatorList_contentSecExcerptWrapper}>
+            <span
+              className={styles.CreatorList_contentSecExcerpt}
+            >
+              {isExpanded ? (
+                <>
+                  {fullText}
+                  <a
+                    href="#"
+                    className={styles.readMoreBtn}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleToggle();
+                    }}
+                    style={{ marginLeft: "8px" }}
+                  >
+                    Read Less
+                  </a>
+                </>
+              ) : (
+                <>
+                  {visibleText}
+                  {isLongText && (
+                    <>
+                      <span className="ellipsis">... </span>
+                      <a
+                        href="#"
+                        className={styles.readMoreBtn}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleToggle();
+                        }}
+                      >
+                        Read More
+                      </a>
+                    </>
+                  )}
+                </>
+              )}
             </span>
-            <span className="readMoreBtn" onClick={handleToggle}>
-              {isExpanded ? " Read Less" : "...Read More"}
-            </span>
-            {/* <button className={styles.readMoreBtn} onClick={handleToggle}>
-              {isExpanded ? "Read Less" : "Read More"}
-            </button> */}
+            {/* <span className="readMoreBtn" onClick={handleToggle}>
+              {isExpanded ? " Read Less" : "Read More"}
+            </span> */}
+            
           </div>
         </div>
       </div>

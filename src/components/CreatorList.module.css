@@ -1,5 +1,6 @@
 .CreatorListHeroSec {
-  background: linear-gradient(to right, #000, rgb(64, 0, 0));
+  /* background: linear-gradient(to right, #000, rgb(64, 0, 0)); */
+  background: linear-gradient(to right, #000, #f13636);
   /* opacity: 0; */
   padding: 100px 0px 30px;
   /* padding: 50px 0px 30px; */
@@ -94,7 +95,7 @@
 .CreatorList_contentSec h1 {
   font-size: 5rem;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1;
   margin-bottom: 25px;
   transition: all 0.3s ease;
   /* font-family: "Kepler-Std Regular Display"; */
@@ -124,6 +125,9 @@
   -webkit-line-clamp: unset;
   display: block;
   overflow: visible;
+}
+.ellipsis{
+
 }
 @media screen and (max-width: 900px) {
   .tooltipText {

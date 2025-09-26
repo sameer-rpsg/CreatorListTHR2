@@ -377,7 +377,7 @@ export  const creators = [
     image:"/creatorsmain photos/38. PRIYAL KUKREJA.png",
     genre: "Lifestyle, Vlogs",
     trivia: "Her videos have been featured on live news channels for their virality and impact.",
-    desc: "BY Gautam Sunder Kukreja is a leading YouTube content creator with a subscriber base of over 45 million people, making her one of the country’s top female digital entertainers. Known for her comedy-centric videos, she often features relatable characters such as the viral Kanjoos Dad. She also has a strong presence on Instagram, with over 649K followers, and frequently collaborates with her brother and fellow creator, Dushyant Kukreja."
+    desc: "Kukreja is a leading YouTube content creator with a subscriber base of over 45 million people, making her one of the country’s top female digital entertainers. Known for her comedy-centric videos, she often features relatable characters such as the viral Kanjoos Dad. She also has a strong presence on Instagram, with over 649K followers, and frequently collaborates with her brother and fellow creator, Dushyant Kukreja."
   },
   {
     id: 39,
