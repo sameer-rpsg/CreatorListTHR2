@@ -8,7 +8,7 @@ import { FaFacebookF, FaLink } from "react-icons/fa";
 const CreatorHero = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
- const handleToggle = () => {
+  const handleToggle = () => {
     setIsExpanded((prev) => {
       const nextState = !prev;
 
@@ -23,8 +23,6 @@ const CreatorHero = () => {
       return nextState;
     });
   };
-
-  // ✅ Define your long text here
   const fullText = `The Hollywood Reporter India’s Creator A-List 2025, in
               collaboration with Ormax Media, ranks India’s 50 most influential
               digital creators who have redefined and expanded the meaning of
@@ -156,9 +154,7 @@ const CreatorHero = () => {
         </div>
         <div className="col-md-12 py-3">
           <div className={styles.CreatorList_contentSecExcerptWrapper}>
-            <span
-              className={styles.CreatorList_contentSecExcerpt}
-            >
+            <span className={styles.CreatorList_contentSecExcerpt}>
               {isExpanded ? (
                 <>
                   {fullText}
@@ -179,7 +175,7 @@ const CreatorHero = () => {
                   {visibleText}
                   {isLongText && (
                     <>
-                      <span className="ellipsis">... </span>
+                      <span className={styles.ellipsis}>... </span>
                       <a
                         href="#"
                         className={styles.readMoreBtn}
@@ -195,10 +191,6 @@ const CreatorHero = () => {
                 </>
               )}
             </span>
-            {/* <span className="readMoreBtn" onClick={handleToggle}>
-              {isExpanded ? " Read Less" : "Read More"}
-            </span> */}
-            
           </div>
         </div>
       </div>
