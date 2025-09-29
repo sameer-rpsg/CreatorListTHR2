@@ -431,16 +431,27 @@
     align-items: flex-start;
     width: 100%;
     position: sticky;
-    height: 80px;
+    height: 65px;
     transform: none;
     top: 70px;
     left: 0;
-    /* background: linear-gradient(to right, #000, rgb(64, 0, 0)); */
-    background: linear-gradient(to right, #000, #f13636);
+    background: linear-gradient(to bottom, #000000, rgba(0, 0, 0, 0));
     z-index: 9;
     gap: 0;
-
+    padding: 0 0.25rem;
   }
+/* Cloudy blur effect at bottom */
+.bars_wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%; /* Adjust height for how much "cloud" you want */
+  background: radial-gradient(ellipse at bottom,  #000000, rgb(0, 0, 0), transparent 100%);
+  filter: blur(20px);
+  pointer-events: none;
+}
 }
 
 @media (max-width: 768px) {
@@ -468,20 +479,6 @@
 
   .bar_wrapper {
     flex-direction: row;
-  }
-
-  .bars_wrapper {
-    flex-direction: row;
-    align-items: flex-start;
-    width: 100%;
-    position: sticky;
-    height: 80px;
-    transform: none;
-    top: 70px;
-    left: 0;
-    background: linear-gradient(to right, #000000c9, rgb(64, 0, 0));
-    z-index: 9;
-    gap: 0;
   }
 
   .profile_container {
