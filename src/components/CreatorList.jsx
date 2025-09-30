@@ -3,29 +3,34 @@ import { creators } from "@/helpers/Data";
 import Bar2 from "./Bar2";
 import CreatorHero from "./CreatorHero";
 import Link from "next/link";
-import styles from "@/components/CreatorList.module.css";
+import styles from "./CreatorList.module.css";
+
+
 const CreatorList = () => {
   const [activeIndex, setActiveIndex] = useState(-1);
-  const profileRefs = useRef([]);
+  const [isManualScroll, setIsManualScroll] = useState(false);
   const [expandedItems, setExpandedItems] = useState({});
   const [characterLimit, setCharacterLimit] = useState(100);
+  const profileRefs = useRef([]);
 
   useEffect(() => {
     const isDesktop = window.innerWidth >= 992;
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: isDesktop ? [1] : [0.5], // 👈 Dynamic threshold
+      threshold: isDesktop ? [1] : [0.5],
     };
 
     const observer = new IntersectionObserver((entries) => {
+      if (isManualScroll) return;
+
       const centerY = window.innerHeight / 2;
 
       let closestIndex = -1;
       let smallestDistance = Infinity;
 
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return; // skip hidden
+        if (!entry.isIntersecting) return;
 
         const rect = entry.boundingClientRect;
         const elementCenterY = rect.top + rect.height / 2;
@@ -41,7 +46,7 @@ const CreatorList = () => {
         setActiveIndex(closestIndex);
       } else {
         if (window.scrollY < 50) {
-          setActiveIndex(-1); // reset at top
+          setActiveIndex(-1);
         }
       }
     }, observerOptions);
@@ -55,30 +60,36 @@ const CreatorList = () => {
         if (ref) observer.unobserve(ref);
       });
     };
-  }, []);
+  }, [isManualScroll]);
 
-  // Set limit based on screen width
   useEffect(() => {
     const updateLimit = () => {
       const width = window.innerWidth;
       setCharacterLimit(width <= 991 ? 300 : 1000);
     };
 
-    updateLimit(); // Initial run
-    window.addEventListener("resize", updateLimit); // Listen for resize
+    updateLimit();
+    window.addEventListener("resize", updateLimit);
 
-    return () => window.removeEventListener("resize", updateLimit); // Cleanup
+    return () => window.removeEventListener("resize", updateLimit);
   }, []);
 
   const handleBarClick = (index) => {
     const target = profileRefs.current[index];
     if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
-      const yOffset = -170; // Adjust this offset based on header height or padding
-      const y =
-        target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      setIsManualScroll(true);
+      setActiveIndex(index); // Manually set during scroll
+
+      const header = document.querySelector("header");
+      const yOffset = header ? -header.offsetHeight - 20 : -170;
+      const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
       window.scrollTo({ top: y, behavior: "smooth" });
+
+      // Unlock observer after scroll ends
+      setTimeout(() => {
+        setIsManualScroll(false);
+      }, 800); // Adjust if your scroll animation is shorter/longer
     }
   };
 
@@ -88,7 +99,6 @@ const CreatorList = () => {
       [id]: !prev[id],
     }));
 
-    // Scroll to top when collapsing
     if (expandedItems[id]) {
       const section = document.getElementById(`creator-${id}`);
       if (section) {
@@ -96,6 +106,7 @@ const CreatorList = () => {
       }
     }
   };
+
   return (
     <>
       <Bar2 activeIndex={activeIndex} onBarClick={handleBarClick} />
@@ -117,20 +128,11 @@ const CreatorList = () => {
                   className={`${styles.profile_container} d-lg-flex col-lg-12 col-xl-12 col-md-12`}
                   id={`creator-${creator.id}`}
                 >
-                  <div
-                    className={`${styles.profile_image} col-lg-4 col-xl-4 col-md-12`}
-                  >
-                    <img
-                      src={creator.image || "default.jpg"}
-                      alt={creator.name}
-                    />
+                  <div className={`${styles.profile_image} col-lg-4 col-xl-4 col-md-12`}>
+                    <img src={creator.image || "default.jpg"} alt={creator.name} />
                   </div>
-                  <div
-                    className={`${styles.profile_content} col-lg-8 col-xl-8 col-md-12`}
-                  >
-                    <h1>
-                      {index + 1}. {creator.name}
-                    </h1>
+                  <div className={`${styles.profile_content} col-lg-8 col-xl-8 col-md-12`}>
+                    <h1>{index + 1}. {creator.name}</h1>
                     <Link href="">
                       <h2>@{creator.realName}</h2>
                     </Link>
@@ -145,17 +147,6 @@ const CreatorList = () => {
                             onClick={(e) => {
                               e.preventDefault();
                               toggleExpand(creator.id);
-                              // Scroll to top of this profile when collapsing
-                              if (isExpanded) {
-                                const section = document.getElementById(
-                                  `creator-${creator.id}`
-                                );
-                                if (section) {
-                                  section.scrollIntoView({
-                                    behavior: "smooth",
-                                  });
-                                }
-                              }
                             }}
                             style={{ marginLeft: "8px" }}
                           >

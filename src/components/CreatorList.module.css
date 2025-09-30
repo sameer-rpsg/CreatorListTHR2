@@ -2,7 +2,7 @@
   /* background: linear-gradient(to right, #000, rgb(64, 0, 0)); */
   background: linear-gradient(to right, #000, #f13636);
   /* opacity: 0; */
-  padding: 100px 0px 30px;
+  padding: 50px 0px 30px;
   /* padding: 50px 0px 30px; */
   color:#fff;
 }
@@ -32,8 +32,8 @@
 }
 
 .followus .items:hover {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
+  background: inherit;
+  border-color: inherit;
   color: #000000;
 }
 
@@ -148,7 +148,7 @@
     transform: translateY(25px);
   }
   .CreatorListHeroSec {
-    padding: 30px 0px 30px;
+    padding: 70px 0px 30px;
   }
 
   .CreatorList_contentSec {
@@ -430,7 +430,7 @@
     flex-direction: row;
     align-items: flex-start;
     width: 100%;
-    position: sticky;
+    position: fixed;
     height: 65px;
     transform: none;
     top: 70px;

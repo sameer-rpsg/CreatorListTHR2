@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "@/components/CreatorList.module.css";
+import styles from "./CreatorList.module.css";
 import Link from "next/link";
 import { LuCopyPlus } from "react-icons/lu";
 import { RiWhatsappFill } from "react-icons/ri";
@@ -51,7 +51,7 @@ Three aspects make the list distinctive. First, it adopts a genuinely holistic a
   return (
     <section id="CreatorListherosec" className={styles.CreatorListHeroSec}>
       <div className="container">
-        <div className="row d-flex align-items-center justify-content-start">
+        <div className="row d-flex justify-content-start">
           <div className="col-md-8 col-lg-10">
             <div className={styles.CreatorList_contentSec}>
               <h1>
@@ -92,9 +92,11 @@ Three aspects make the list distinctive. First, it adopts a genuinely holistic a
             <span className={styles.CreatorList_contentSecExcerpt}>
               {isExpanded ? (
                 <>
-                  {fullText.split("\n\n").map((paragraph, index) => (
-                    <p key={index}>{paragraph}</p>
-                  ))}
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: fullText.split("\n\n").join("<br /><br />"),
+                    }}
+                  ></span>
                   <a
                     href="#"
                     className={styles.readMoreBtn}
@@ -109,19 +111,24 @@ Three aspects make the list distinctive. First, it adopts a genuinely holistic a
                 </>
               ) : (
                 <>
-                  <span>{visibleText}...</span>
-                  {isLongText && (
-                    <a
-                      href="#"
-                      className={styles.readMoreBtn}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleToggle();
-                      }}
-                    >
-                      Read More
-                    </a>
-                  )}
+                  <span>
+                    {visibleText}
+                    {isLongText && (
+                      <>
+                        <span className={styles.ellipsis}>... </span>
+                        <a
+                          href="#"
+                          className={styles.readMoreBtn}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleToggle();
+                          }}
+                        >
+                          Read More
+                        </a>
+                      </>
+                    )}
+                  </span>
                 </>
               )}
             </span>

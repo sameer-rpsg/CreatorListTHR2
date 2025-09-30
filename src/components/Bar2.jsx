@@ -1,10 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { creators } from "@/helpers/Data";
 import gsap from "gsap";
-import styles from "@/components/CreatorList.module.css";
+import styles from "./CreatorList.module.css";
 
 const Bar2 = ({ activeIndex, onBarClick }) => {
-  const bars = Array.from({ length: creators.length });
   const barRefs = useRef([]);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ const Bar2 = ({ activeIndex, onBarClick }) => {
 
   return (
     <div className={styles.bars_wrapper}>
-      {bars.map((_, i) => {
+      {creators.map((_, i) => {
         const isTall = i % 4 === 0;
         const isActive = activeIndex !== -1 && i <= activeIndex;
         const isLabelVisible = i === activeIndex;
@@ -47,8 +46,6 @@ const Bar2 = ({ activeIndex, onBarClick }) => {
               `}
               ref={(el) => (barRefs.current[i] = el)}
             ></div>
-
-            {/* Only active index has visible label */}
             <div className={styles.bar_label}>{i + 1}</div>
           </div>
         );
